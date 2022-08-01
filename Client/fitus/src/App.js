@@ -1,8 +1,10 @@
 
+import LoginScreen from './components/screens/Auth/LoginScreen'
+
 function App() {
   return (
     <div className="App">
-      bla bla
+      Bla bla
     </div>
   );
 }
