@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const memberSchema = new mongoose.Schema({
+const instructorSchema = new mongoose.Schema({
 
     FirstName: {
         type: String,
@@ -23,33 +23,28 @@ const memberSchema = new mongoose.Schema({
         required: [true, "Please enter your phone number"],
         trim: true 
     },
+    EmgNo: {
+        type: String,
+        required: [true, "Please enter your emergency phone number"],
+        trim: true 
+    },
     Password: {
         type: String,
         required: [true, "Please enter your password"],
         trim: true 
     },
+    NIC: {
+        type: String,
+        required: [true, "Please enter your NIC"],
+        trim: true 
+    },
     role: {
         type: Number,
-        default: 2 // 0 = admin, 1 = instructor, 2 = member
-    },
-    Height: {
-        type: String,
-        required: [true, "Please enter your height in cm"],
-        trim: true 
-    },
-    Weight: {
-        type: String,
-        required: [true, "Please enter your weight in kg"],
-        trim: true 
+        default: 1 // 0 = admin, 1 = instructor, 2 = member
     },
     Address: {
         type: String,
         required: [true, "Please enter your address"],
-        trim: true 
-    },
-    Occupation: {
-        type: String,
-        required: [true, "Please enter your occupation"],
         trim: true 
     },
     DoB: {
@@ -71,4 +66,4 @@ const memberSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model("Members", memberSchema)
+module.exports = mongoose.model("Instructors", instructorSchema)
