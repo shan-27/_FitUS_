@@ -3,17 +3,17 @@ const {google} = require('googleapis')
 const {OAuth2} = google.auth;
 const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
 
-/*const {
+const {
     MAILING_SERVICE_CLIENT_ID,
     MAILING_SERVICE_CLIENT_SECRET,
     MAILING_SERVICE_REFRESH_TOKEN,
     SENDER_EMAIL_ADDRESS
-} = process.env*/
+} = process.env
 
-const MAILING_SERVICE_CLIENT_ID = '395683594204-pj1one08odudqfbbktao8clgr53n63lj.apps.googleusercontent.com'
-const MAILING_SERVICE_CLIENT_SECRET = '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'
-const MAILING_SERVICE_REFRESH_TOKEN = '1//04GxiXhgJ6ggWCgYIARAAGAQSNwF-L9IrL9gV-p1rRcHceJcI0cZWK0lxT5q-R4NgrODq6yCpKB8iqi2ttFbWTxiJ9DvTuxI3O60'
-const SENDER_EMAIL_ADDRESS = 'lakshanshami27@gmail.com'
+//const MAILING_SERVICE_CLIENT_ID = '395683594204-pj1one08odudqfbbktao8clgr53n63lj.apps.googleusercontent.com'
+//const MAILING_SERVICE_CLIENT_SECRET = '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'
+//const MAILING_SERVICE_REFRESH_TOKEN = '1//04GxiXhgJ6ggWCgYIARAAGAQSNwF-L9IrL9gV-p1rRcHceJcI0cZWK0lxT5q-R4NgrODq6yCpKB8iqi2ttFbWTxiJ9DvTuxI3O60'
+//const SENDER_EMAIL_ADDRESS = 'lakshanshami27@gmail.com'
 
 const oauth2Client = new OAuth2(
     MAILING_SERVICE_CLIENT_ID,
