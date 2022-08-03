@@ -6,5 +6,6 @@ router.post('/register', memberCtrl.register)
 
 router.post('/activation', memberCtrl.activateEmail)
 
+router.post('/login', memberCtrl.login)
 
 module.exports = router
