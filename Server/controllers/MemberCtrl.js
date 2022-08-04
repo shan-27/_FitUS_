@@ -119,7 +119,7 @@ const memberCtrl = {
         }
     },
 
-    //Member Fogot password
+    //Member Forgot password
     forgotPW: async (req, res) => {
         try{
             const {Email} = req.body
