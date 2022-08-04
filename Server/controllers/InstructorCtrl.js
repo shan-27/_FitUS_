@@ -1,7 +1,7 @@
 const Instructors = require('../models/InstructorModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const sendMail = require('./sendMail')
+const sendEmail = require('./sendMail')
 
 const CLIENT_URL = process.env.CLIENT_URL
 
@@ -95,6 +95,7 @@ const instructorCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
@@ -111,8 +112,27 @@ const instructorCtrl = {
         } catch (err) {
            return res.status(500).json({msg: err.message}) 
         }
-    }
+    },
 
+    //Instructor forgot password
+    forgotPW: async(req, res) => {
+        try{
+            const {Email} = req.body
+            const instructor = await Instructors.findOne({Email})
+            if(!instructor) return res.status(400).json({msg: "This email does not exist."})
+
+            const access_token = createAccessToken({id: instructor._id})
+            const url = `${CLIENT_URL}/instructor/reset/${access_token}`
+            
+            sendEmail(Email, url, "Reset your Instructor account password")
+            res.json({msg: "Please check your email to reset your password"})
+
+
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
+ 
 }
 
 const validateEmail = (email) => {

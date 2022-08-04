@@ -100,7 +100,7 @@ const memberCtrl = {
         }
     },
     
-    
+
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
