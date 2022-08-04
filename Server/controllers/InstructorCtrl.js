@@ -34,7 +34,7 @@ const instructorCtrl = {
             const activation_token = createActivationToken(newInstructor)
             
             const url = `${CLIENT_URL}/instructor/activate/${activation_token}`
-            sendMail(Email,url)
+            sendMail(Email,url, "Verify your email")
             console.log({activation_token})
 
 

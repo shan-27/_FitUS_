@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
 const { UserRefreshClient } = require('google-auth-library')
+const sendEmail = require('./sendMail')
 
 const CLIENT_URL = process.env.CLIENT_URL
 
@@ -40,7 +41,7 @@ const memberCtrl = {
             const activation_token = createActivationToken(newMember)
 
             const url = `${CLIENT_URL}/member/activate/${activation_token}`
-            sendMail(Email,url)
+            sendMail(Email,url, "Verfy your email")
             console.log({activation_token})
 
             res.json({msg: "Registration Success! Please activate your account."})
@@ -98,21 +99,44 @@ const memberCtrl = {
           return res.status(500).json({msg: err.message})  
         }
     },
+    
+    
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
+            console.log(rf_token)
             if(!rf_token) return res.status(400).json({msg: "Please login now!"})
 
-            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, member) => {
+            jwt.verify(rf_token, '#^j?4RyY!U3cMPU=x~^GGVQuf#J&p1xKcJmRz*sU8J!C#ENtJq', (err, member) => {
                 if(err) return res.status(400).json({msg: "Please login now!"})
                 
                 const access_token = createAccessToken({id: member.id})
+                console.log({access_token})
                 res.json({access_token})
             })
         } catch (err) {
            return res.status(500).json({msg: err.message}) 
         }
-    } 
+    },
+
+    //Member Fogot password
+    forgotPW: async (req, res) => {
+        try{
+            const {Email} = req.body
+            const member = await Members.findOne({Email})
+            if(!member) return res.status(400).json({msg: "This email does not exist."})
+
+            const access_token = createAccessToken({id: member._id})
+            const url = `${CLIENT_URL}/member/reset/${access_token}`
+
+            sendEmail(Email, url, "Reset your password")
+            res.json({msg: "Please check your email to reset your password"})
+
+
+        } catch (err) {
+            return res.status(500).json({msg: err.message}) 
+        }
+    }
 }
 
 const validateEmail = (email) => {
