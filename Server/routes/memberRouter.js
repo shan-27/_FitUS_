@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const memberCtrl = require('../controllers/MemberCtrl')
-
+const authM = require('../middleware/authM')
 
 router.post('/register', memberCtrl.register)
 
@@ -11,5 +11,7 @@ router.post('/login', memberCtrl.login)
 router.post('/refresh_token', memberCtrl.getAccessToken)
 
 router.post('/forgotpw', memberCtrl.forgotPW)
+
+router.post('/resetpw', authM, memberCtrl.resetPW)
 
 module.exports = router

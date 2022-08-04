@@ -127,6 +127,7 @@ const memberCtrl = {
             if(!member) return res.status(400).json({msg: "This email does not exist."})
 
             const access_token = createAccessToken({id: member._id})
+            console.log({access_token})
             const url = `${CLIENT_URL}/member/reset/${access_token}`
 
             sendEmail(Email, url, "Reset your password")
@@ -136,6 +137,25 @@ const memberCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message}) 
         }
+    },
+
+    //Member Reset password
+    resetPW: async (req, res) => {
+	    try {
+		    const {Password} = req.body
+		    console.log(Password)
+		    const passwordHash = await bcrypt.hash(Password, 12)
+
+            console.log(req.member)
+		    await Members.findOneAndUpdate({_id: req.member.id}, {
+                Password: passwordHash
+            })
+
+            
+            res.json({msg: "Password successfully changed!"})
+	    } catch (err) {
+		    return res.status(500).json({msg: err.message})
+	    }
     }
 }
 

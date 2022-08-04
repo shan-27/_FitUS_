@@ -122,6 +122,7 @@ const instructorCtrl = {
             if(!instructor) return res.status(400).json({msg: "This email does not exist."})
 
             const access_token = createAccessToken({id: instructor._id})
+            console.log({access_token})
             const url = `${CLIENT_URL}/instructor/reset/${access_token}`
             
             sendEmail(Email, url, "Reset your Instructor account password")
@@ -131,6 +132,25 @@ const instructorCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+
+    //Instructor Reset password
+    resetPW: async (req, res) => {
+	    try {
+		    const {Password} = req.body
+		    console.log(Password)
+		    const passwordHash = await bcrypt.hash(Password, 12)
+
+            console.log(req.instructor)
+		    await Instructors.findOneAndUpdate({_id: req.instructor.id}, {
+                Password: passwordHash
+            })
+
+            
+            res.json({msg: "Password successfully changed!"})
+	    } catch (err) {
+		    return res.status(500).json({msg: err.message})
+	    }
     }
  
 }
