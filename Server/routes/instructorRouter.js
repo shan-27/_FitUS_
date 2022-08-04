@@ -10,4 +10,6 @@ router.post('/login', instructorCtrl.login)
 
 router.post('/refresh_token', instructorCtrl.getAccessToken)
 
+router.post('/forgotpw', instructorCtrl.forgotPW)
+
 module.exports = router
