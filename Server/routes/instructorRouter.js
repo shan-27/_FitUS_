@@ -2,7 +2,7 @@ const router = require('express').Router()
 const instructorCtrl = require('../controllers/InstructorCtrl')
 const authI = require('../middleware/authI')
 const authAdmin = require('../middleware/authAdmin')
-
+const authM = require('../middleware/authM')
 
 router.post('/register', instructorCtrl.register)
 
@@ -26,4 +26,7 @@ router.get('/allmember_info', authI, authAdmin, instructorCtrl.getAllmembers)
 
 router.patch('/update', authI, instructorCtrl.updateInstructor) 
 
+router.delete('/deleteIns/:id', authI, authAdmin, instructorCtrl.deleteInstructor)
+
+router.delete('/deleteMem/:id', authI, authAdmin, instructorCtrl.deleteMember)
 module.exports = router
