@@ -18,5 +18,7 @@ router.get('/info', authM, memberCtrl.getMemberInfo)
 
 router.get('/logout',  memberCtrl.logout)
 
+router.patch('/update', authM, memberCtrl.updateMember) 
+
 
 module.exports = router

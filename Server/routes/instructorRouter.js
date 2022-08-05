@@ -24,4 +24,6 @@ router.get('/allinstructor_info', authI, authAdmin, instructorCtrl.getAllinstruc
 
 router.get('/allmember_info', authI, authAdmin, instructorCtrl.getAllmembers)
 
+router.patch('/update', authI, instructorCtrl.updateInstructor) 
+
 module.exports = router

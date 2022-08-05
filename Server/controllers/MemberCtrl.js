@@ -183,6 +183,18 @@ const memberCtrl = {
     },
 
     //Update Member info (H)
+    updateMember: async(req, res) => {
+        try {
+            const {FirstName, LastName, PhNo, Height, Weight, Address, Occupation, DoB, Gender, avatar} = req.body
+            await Members.findOneAndUpdate({_id: req.member.id},{
+                FirstName, LastName, PhNo, Height, Weight, Address, Occupation, DoB, Gender, avatar
+            })
+
+            res.json({msg: "Update Success!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
 
     //Upload avatar
 

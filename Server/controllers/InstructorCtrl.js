@@ -180,6 +180,18 @@ const instructorCtrl = {
     },
 
     //Update instructor info (H)
+    updateInstructor: async(req, res) => {
+        try {
+            const {FirstName, LastName, PhNo, EmgNo, NIC, Address, DoB, Gender, avatar} = req.body
+            await Instructors.findOneAndUpdate({_id: req.instructor.id},{
+                FirstName, LastName, PhNo, EmgNo, NIC, Address, DoB, Gender, avatar 
+            })
+
+            res.json({msg: "Update Success!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
     //Upload avatar (S)
 
