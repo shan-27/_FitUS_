@@ -14,4 +14,9 @@ router.post('/forgotpw', memberCtrl.forgotPW)
 
 router.post('/resetpw', authM, memberCtrl.resetPW)
 
+router.get('/info', authM, memberCtrl.getMemberInfo)
+
+router.get('/logout',  memberCtrl.logout)
+
+
 module.exports = router

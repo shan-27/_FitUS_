@@ -1,7 +1,8 @@
 const Instructors = require('../models/InstructorModel')
+const Members = require('../models/MemberModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const sendEmail = require('./sendMail')
+const sendMail = require('./sendMail')
 
 const CLIENT_URL = process.env.CLIENT_URL
 
@@ -125,7 +126,7 @@ const instructorCtrl = {
             console.log({access_token})
             const url = `${CLIENT_URL}/instructor/reset/${access_token}`
             
-            sendEmail(Email, url, "Reset your Instructor account password")
+            sendMail(Email, url, "Reset your Instructor account password")
             res.json({msg: "Please check your email to reset your password"})
 
 
@@ -151,7 +152,61 @@ const instructorCtrl = {
 	    } catch (err) {
 		    return res.status(500).json({msg: err.message})
 	    }
+    },
+
+    //Get instructor info
+    getInstructorInfo: async (req, res) => {
+        try{
+            const instructor = await Instructors.findById(req.instructor.id).select('-Password')
+            res.json(instructor)
+    
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    
+    
+    },
+
+    //Instructor Logout
+    logout: async(req, res) => {
+        try {
+            res.clearCookie('refreshtoken', {path: '/instructor/refresh_token'})
+            return res.json({msg: "You have successfully logged out." })
+                
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+
+
+//Admin
+    //get all instructor info as Admin
+    getAllinstructors: async (req, res) => {
+        try {
+            //console.log(req.instructor)
+            const instructors = await Instructors.find().select('-Password')
+            res.json(instructors)
+
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+    //get all member info as Admin
+    getAllmembers: async (req, res) => {
+        try {
+            //console.log(req.member)
+            const members = await Members.find().select('-Password')
+            res.json(members)
+
+
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
     }
+
+
  
 }
 
