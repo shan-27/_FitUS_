@@ -130,7 +130,7 @@ const memberCtrl = {
             console.log({access_token})
             const url = `${CLIENT_URL}/member/reset/${access_token}`
 
-            sendEmail(Email, url, "Reset your password")
+            sendMail(Email, url, "Reset your password")
             res.json({msg: "Please check your email to reset your password"})
 
 
@@ -156,6 +156,19 @@ const memberCtrl = {
 	    } catch (err) {
 		    return res.status(500).json({msg: err.message})
 	    }
+    },
+
+    //Get member info
+    getMemberInfo: async (req, res) => {
+        try{
+            const member = await Members.findById(req.member.id).select('-Password')
+            res.json(member)
+
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+
+
     }
 }
 
