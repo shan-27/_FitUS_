@@ -9,7 +9,7 @@ const CLIENT_URL = process.env.CLIENT_URL
 
 const memberCtrl = {
 
-    // Member Registration
+    // Member Registration (S)
     register: async (req, res) => {
         try {
             const {FirstName, LastName, Email, PhNo, Password, Height, Weight, Address, Occupation, DoB, Gender } = req.body
@@ -52,7 +52,7 @@ const memberCtrl = {
 
     },
 
-    //Member Activation
+    //Member Activation (S)
     activateEmail: async (req, res) => {
         try{
             const {activation_token} = req.body
@@ -77,7 +77,7 @@ const memberCtrl = {
         }
     },
 
-    //Member Login
+    //Member Login (H)
     login:async (req, res) => {
         try {
             const {Email, Password} = req.body
@@ -100,7 +100,7 @@ const memberCtrl = {
         }
     },
     
-
+    // (H)
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
@@ -119,7 +119,7 @@ const memberCtrl = {
         }
     },
 
-    //Member Forgot password
+    //Member Forgot password (S)
     forgotPW: async (req, res) => {
         try{
             const {Email} = req.body
@@ -139,7 +139,7 @@ const memberCtrl = {
         }
     },
 
-    //Member Reset password
+    //Member Reset password (H)
     resetPW: async (req, res) => {
 	    try {
 		    const {Password} = req.body
@@ -158,7 +158,7 @@ const memberCtrl = {
 	    }
     },
 
-    //Get member info
+    //Get member info (S)
     getMemberInfo: async (req, res) => {
         try{
             const member = await Members.findById(req.member.id).select('-Password')
@@ -171,7 +171,7 @@ const memberCtrl = {
 
     },
 
-    //Member Logout
+    //Member Logout (S)
     logout: async(req, res) => {
         try {
             res.clearCookie('refreshtoken', {path: '/member/refresh_token'})
@@ -180,7 +180,13 @@ const memberCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+
+    //Update Member info (H)
+
+    //Upload avatar
+
+
 }
 
 const validateEmail = (email) => {

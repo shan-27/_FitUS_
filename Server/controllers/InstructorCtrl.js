@@ -8,7 +8,7 @@ const CLIENT_URL = process.env.CLIENT_URL
 
 const instructorCtrl = {
 
-    // Instructor Registration
+    // Instructor Registration (S)
     register: async (req, res) => {
         try {
 
@@ -48,7 +48,7 @@ const instructorCtrl = {
 
     },
 
-    //Instructor Activation
+    //Instructor Activation (S)
     activateEmail: async (req, res) => {
         try{
             const {activation_token} = req.body
@@ -73,7 +73,7 @@ const instructorCtrl = {
         }
     },
 
-    //Instructor Login
+    //Instructor Login (H)
     login: async (req, res) => {
         try {
             const {Email, Password} = req.body
@@ -97,6 +97,7 @@ const instructorCtrl = {
         }
     },
 
+    // (H)
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
@@ -115,7 +116,7 @@ const instructorCtrl = {
         }
     },
 
-    //Instructor forgot password
+    //Instructor forgot password (S)
     forgotPW: async(req, res) => {
         try{
             const {Email} = req.body
@@ -135,7 +136,7 @@ const instructorCtrl = {
         }
     },
 
-    //Instructor Reset password
+    //Instructor Reset password (H)
     resetPW: async (req, res) => {
 	    try {
 		    const {Password} = req.body
@@ -154,7 +155,7 @@ const instructorCtrl = {
 	    }
     },
 
-    //Get instructor info
+    //Get instructor info (S)
     getInstructorInfo: async (req, res) => {
         try{
             const instructor = await Instructors.findById(req.instructor.id).select('-Password')
@@ -167,7 +168,7 @@ const instructorCtrl = {
     
     },
 
-    //Instructor Logout
+    //Instructor Logout (S)
     logout: async(req, res) => {
         try {
             res.clearCookie('refreshtoken', {path: '/instructor/refresh_token'})
@@ -178,10 +179,16 @@ const instructorCtrl = {
         }
     },
 
+    //Update instructor info (H)
+
+    //Upload avatar (S)
+
+
+
 
 
 //Admin
-    //get all instructor info as Admin
+    //get all instructor info as Admin (S)
     getAllinstructors: async (req, res) => {
         try {
             //console.log(req.instructor)
@@ -193,7 +200,7 @@ const instructorCtrl = {
         }
     },
 
-    //get all member info as Admin
+    //get all member info as Admin (S)
     getAllmembers: async (req, res) => {
         try {
             //console.log(req.member)
@@ -204,7 +211,13 @@ const instructorCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+
+    //Update instructor role (S)
+
+    //Delete instructor (H)
+
+    //Delete member (H)
 
 
  
