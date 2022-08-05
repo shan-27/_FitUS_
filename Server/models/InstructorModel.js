@@ -59,7 +59,7 @@ const instructorSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: "https://drive.google.com/file/d/1UNorvB3RvqkwM2YfaR5P71POQ9_Mwda9/view?usp=sharing"
+        default: "https://res.cloudinary.com/fituscloud/image/upload/v1659693106/FitUS_Avatar/default_avatar_yemfqd.png"
     },
 
 }, {
