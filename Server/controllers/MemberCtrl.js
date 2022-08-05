@@ -169,6 +169,17 @@ const memberCtrl = {
         }
 
 
+    },
+
+    //Member Logout
+    logout: async(req, res) => {
+        try {
+            res.clearCookie('refreshtoken', {path: '/member/refresh_token'})
+            return res.json({msg: "You have successfully logged out." })
+            
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
     }
 }
 

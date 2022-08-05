@@ -18,6 +18,8 @@ router.post('/resetpw', authI, instructorCtrl.resetPW)
 
 router.get('/info', authI, instructorCtrl.getInstructorInfo)
 
+router.get('/logout', instructorCtrl.logout)
+
 router.get('/allinstructor_info', authI, authAdmin, instructorCtrl.getAllinstructors)
 
 router.get('/allmember_info', authI, authAdmin, instructorCtrl.getAllmembers)
