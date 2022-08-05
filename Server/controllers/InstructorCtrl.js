@@ -228,9 +228,26 @@ const instructorCtrl = {
     //Update instructor role (S)
 
     //Delete instructor (H)
+    deleteInstructor: async (req, res) => {
+        try {
+           await Instructors.findByIdAndDelete(req.params.id)
+           
+           res.json({msg: "Deleted success!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
     //Delete member (H)
-
+    deleteMember: async (req, res) => {
+        try {
+           await Members.findByIdAndDelete(req.params.id)
+           
+           res.json({msg: "Deleted success!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
  
 }
