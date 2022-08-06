@@ -225,7 +225,7 @@ const instructorCtrl = {
         }
     },
 
-    //Update instructor role (S)
+    //Update instructor role (S) 
     updateRole: async (req, res) => {
         try {
             const {role} = req.body
