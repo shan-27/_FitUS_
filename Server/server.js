@@ -16,7 +16,6 @@ app.use(fileUpload({
 ///Routes
 app.use('/member', require('./routes/memberRouter'));
 app.use('/instructor', require('./routes/instructorRouter'));
-app.use('/api', require('./routes/upload'));
 
 ///Connect to mongoDB
 connectDB();
