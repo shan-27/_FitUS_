@@ -226,6 +226,18 @@ const instructorCtrl = {
     },
 
     //Update instructor role (S)
+    updateRole: async (req, res) => {
+        try {
+            const {role} = req.body
+            await Instructors.findOneAndUpdate({_id: req.params.id},{
+                role
+            })
+
+            res.json({msg: "Successfully updated as a Admin!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
     //Delete instructor (H)
     deleteInstructor: async (req, res) => {

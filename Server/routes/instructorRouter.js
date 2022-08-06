@@ -29,4 +29,7 @@ router.patch('/update', authI, instructorCtrl.updateInstructor)
 router.delete('/deleteIns/:id', authI, authAdmin, instructorCtrl.deleteInstructor)
 
 router.delete('/deleteMem/:id', authI, authAdmin, instructorCtrl.deleteMember)
+
+router.patch('/update_role/:id', authI, authAdmin, instructorCtrl.updateRole) 
+
 module.exports = router
